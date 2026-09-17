@@ -1,0 +1,32 @@
+@font-face {
+  font-family: "Google Sans";
+  src: url("./assets/fonts/GoogleSans-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  font-family: "Google Sans", sans-serif;
+  background: #ffffff;
+}
+
+.app {
+  min-height: 100vh;
+}
+.empty-page {
+  min-height: calc(100vh - 98px);
+  background: #ffffff;
+}

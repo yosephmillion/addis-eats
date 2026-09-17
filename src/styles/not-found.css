@@ -1,0 +1,203 @@
+@font-face {
+  font-family: "Google Sans";
+  src: url("../assets/fonts/GoogleSans-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Abyssinia";
+  src: url("../assets/fonts/abyssinia-bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+.not-found-page {
+  min-height: calc(100vh - 98px);
+  display: flex;
+  align-items: center;
+  padding: 70px 0;
+  background: #ffffff;
+  color: #000000;
+}
+
+.not-found-page .container {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.not-found-card {
+  position: relative;
+  max-width: 850px;
+  min-height: 540px;
+  margin: 0 auto;
+  padding: 65px 70px;
+  overflow: hidden;
+  border-radius: 24px;
+  background: #000000;
+  color: #ffffff;
+  text-align: center;
+}
+
+.not-found-card::before {
+  content: "አዲስ";
+  position: absolute;
+  top: 30px;
+  right: 45px;
+  color: rgba(255, 255, 255, 0.035);
+  font-family: "Abyssinia", sans-serif;
+  font-size: 7rem;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.not-found-card::after {
+  content: "";
+  position: absolute;
+  bottom: -100px;
+  left: -100px;
+  width: 300px;
+  height: 300px;
+  border: 1px solid rgba(154, 90, 53, 0.3);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.not-found-label {
+  position: relative;
+  z-index: 2;
+  display: inline-block;
+  margin-bottom: 20px;
+  color: #c4875e;
+  font-family: "Google Sans", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.not-found-number {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  color: #ffffff;
+  font-family: "Google Sans", sans-serif;
+  font-size: clamp(8rem, 18vw, 13rem);
+  line-height: 0.78;
+  letter-spacing: -0.08em;
+  font-weight: 700;
+}
+
+.not-found-amharic {
+  position: relative;
+  z-index: 2;
+  margin-top: 24px;
+  color: #9a5a35;
+  font-family: "Abyssinia", sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.4;
+}
+
+.not-found-card h1 {
+  position: relative;
+  z-index: 2;
+  margin: 8px 0 12px;
+  color: #ffffff;
+  font-family: "Google Sans", sans-serif;
+  font-size: 2.3rem;
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+.not-found-card p {
+  position: relative;
+  z-index: 2;
+  max-width: 520px;
+  margin: 0 auto;
+  color: #bdbdbd;
+  font-family: "Google Sans", sans-serif;
+  font-size: 0.82rem;
+  line-height: 1.65;
+}
+
+.not-found-actions {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.not-found-actions .btn {
+  min-width: 135px;
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 20px;
+  border-radius: 7px;
+  font-family: "Google Sans", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.not-found-actions .btn-primary {
+  border: 1px solid #9a5a35;
+  background: #9a5a35;
+  color: #ffffff;
+}
+
+.not-found-actions .btn-secondary {
+  border: 1px solid #ffffff;
+  background: transparent;
+  color: #ffffff;
+}
+
+@media (max-width: 650px) {
+  .not-found-page {
+    padding: 45px 0;
+  }
+
+  .not-found-page .container {
+    padding: 0 16px;
+  }
+
+  .not-found-card {
+    min-height: 500px;
+    padding: 55px 25px;
+    border-radius: 20px;
+  }
+
+  .not-found-card::before {
+    right: -40px;
+    font-size: 5rem;
+  }
+
+  .not-found-number {
+    font-size: 7.5rem;
+  }
+
+  .not-found-amharic {
+    font-size: 1.2rem;
+  }
+
+  .not-found-card h1 {
+    font-size: 1.9rem;
+  }
+
+  .not-found-card p {
+    font-size: 0.75rem;
+  }
+
+  .not-found-actions {
+    flex-direction: column;
+  }
+
+  .not-found-actions .btn {
+    width: 100%;
+  }
+}

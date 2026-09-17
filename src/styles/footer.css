@@ -1,0 +1,192 @@
+@font-face {
+  font-family: "Google Sans";
+  src: url("../assets/fonts/GoogleSans-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Google Sans";
+  src: url("../assets/fonts/GoogleSans-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+.site-footer {
+  width: 100%;
+  min-height: 330px;
+  background: #000000;
+  color: #ffffff;
+  font-family: "Google Sans", sans-serif;
+}
+
+.footer-container {
+  position: relative;
+  width: 100%;
+  max-width: 1180px;
+  min-height: 330px;
+  margin: 0 auto;
+  padding: 38px 40px 30px;
+
+  display: grid;
+  grid-template-columns: 1.8fr 0.9fr 0.9fr 0.9fr;
+  column-gap: 70px;
+}
+
+/* =========================
+   BRAND
+========================= */
+
+.footer-brand {
+  align-self: end;
+}
+
+.footer-logo-image {
+  display: block;
+  width: 240px;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 13px;
+}
+
+.footer-brand p {
+  margin: 0;
+
+  color: #ffffff;
+  font-family: "Google Sans", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 400;
+  line-height: 1.35;
+}
+
+/* =========================
+   FOOTER COLUMNS
+========================= */
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  align-self: start;
+}
+
+.footer-column h3 {
+  margin: 0 0 8px;
+
+  color: #ffffff;
+  font-family: "Google Sans", sans-serif;
+  font-size: 1.45rem;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.footer-column a {
+  display: block;
+  width: fit-content;
+
+  margin: 0 0 3px;
+
+  color: #ffffff;
+  font-family: "Google Sans", sans-serif;
+  font-size: 1.15rem;
+  font-weight: 400;
+  line-height: 1.25;
+
+  text-decoration: none;
+}
+
+/*
+  No zoom, movement or animation.
+  Only the text color changes.
+*/
+.footer-column a:hover {
+  color: #dddddd;
+}
+
+/* =========================
+   COPYRIGHT
+========================= */
+
+.footer-copyright {
+  position: absolute;
+  right: 40px;
+  bottom: 30px;
+
+  color: #ffffff;
+  font-family: "Google Sans", sans-serif;
+  font-size: 1.15rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 850px) {
+  .footer-container {
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 40px;
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+    align-self: start;
+  }
+
+  .footer-logo-image {
+    width: 210px;
+  }
+
+  .footer-copyright {
+    position: static;
+    grid-column: 1 / -1;
+    margin-top: 35px;
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+  .site-footer {
+    min-height: auto;
+  }
+
+  .footer-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 35px 25px;
+
+    min-height: auto;
+    padding: 40px 24px 30px;
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
+
+  .footer-logo-image {
+    width: 190px;
+  }
+
+  .footer-brand p {
+    font-size: 0.75rem;
+  }
+
+  .footer-column h3 {
+    font-size: 1.2rem;
+  }
+
+  .footer-column a {
+    font-size: 1rem;
+  }
+
+  .footer-copyright {
+    grid-column: 1 / -1;
+
+    margin-top: 15px;
+
+    font-size: 0.95rem;
+  }
+}

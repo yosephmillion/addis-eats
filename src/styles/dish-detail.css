@@ -1,0 +1,583 @@
+@font-face {
+  font-family: "Google Sans";
+  src: url("../assets/fonts/GoogleSans-Regular.ttf") format("truetype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Google Sans";
+  src: url("../assets/fonts/GoogleSans-Bold.ttf") format("truetype");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Abyssinia";
+  src: url("../assets/fonts/abyssinia-bold.ttf") format("truetype");
+  font-weight: 700;
+}
+
+.dish-detail-page {
+  min-height: calc(100vh - 98px);
+  padding: 60px 0 80px;
+  background: #ffffff;
+  color: #1b1118;
+  font-family: "Google Sans", sans-serif;
+}
+
+.dish-detail-page .container {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.dish-detail-layout {
+  display: grid;
+  grid-template-columns: 430px minmax(0, 1fr);
+  gap: 32px;
+  align-items: start;
+}
+
+/* =========================
+   LEFT
+========================= */
+
+.dish-detail-left {
+  min-width: 0;
+}
+
+.dish-main-image {
+  position: relative;
+  width: 100%;
+  height: 485px;
+  overflow: hidden;
+  border-radius: 4px;
+  background: #eeeeee;
+}
+
+.dish-main-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dish-special-star {
+  position: absolute;
+  left: 15px;
+  bottom: 13px;
+
+  color: #ffb000;
+  font-size: 2rem;
+  line-height: 1;
+}
+
+/* =========================
+   MAIN QTY
+========================= */
+
+.dish-main-quantity {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+
+  display: flex;
+  align-items: center;
+
+  overflow: hidden;
+  border-radius: 2px;
+  background: #ffffff;
+}
+
+.dish-main-quantity button,
+.dish-main-quantity span {
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  background: #ffffff;
+
+  color: #111111;
+  font-family: "Google Sans", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.dish-main-quantity button {
+  cursor: pointer;
+}
+
+.dish-main-quantity button:hover {
+  background: #eeeeee;
+}
+
+/* =========================
+   NOTE
+========================= */
+
+.dish-note-area {
+  margin-top: 38px;
+}
+
+.dish-note-area label {
+  display: block;
+  margin-bottom: 10px;
+
+  color: #111111;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.dish-note-area textarea {
+  display: block;
+
+  width: 100%;
+  min-height: 90px;
+
+  padding: 0;
+
+  border: none;
+  outline: none;
+  resize: vertical;
+
+  color: #222222;
+  background: transparent;
+
+  font-family: "Google Sans", sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.dish-note-area textarea::placeholder {
+  color: #c3c3c3;
+}
+
+/* =========================
+   HEADING
+========================= */
+
+.dish-detail-right {
+  min-width: 0;
+}
+
+.dish-heading {
+  margin-bottom: 25px;
+}
+
+.dish-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.dish-title-row h1 {
+  margin: 0;
+
+  color: #1b1118;
+  font-size: 3.15rem;
+  line-height: 0.98;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+
+.dish-name-am {
+  margin: 9px 0 0;
+
+  color: #111111;
+  font-family: "Abyssinia", sans-serif;
+  font-size: 1.55rem;
+  line-height: 1.1;
+}
+
+.dish-price {
+  flex-shrink: 0;
+
+  margin-top: 7px;
+
+  color: #111111;
+  font-size: 1.85rem;
+  white-space: nowrap;
+}
+
+.dish-tagline {
+  margin: 13px 0 0;
+
+  color: #333333;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.dish-category {
+  margin: 8px 0 0;
+
+  color: #444444;
+  font-size: 0.88rem;
+}
+
+.dish-description {
+  max-width: 670px;
+  margin: 9px 0 0;
+
+  color: #333333;
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+/* =========================
+   TOP ADD TO CART
+========================= */
+
+.dish-top-action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 30px;
+  padding: 15px 0;
+
+  border-top: 1px solid #dddddd;
+  border-bottom: 1px solid #dddddd;
+}
+
+.dish-top-total {
+  display: flex;
+  flex-direction: column;
+}
+
+.dish-top-total span {
+  color: #666666;
+  font-size: 0.7rem;
+}
+
+.dish-top-total strong {
+  margin-top: 2px;
+
+  color: #111111;
+  font-size: 1.45rem;
+}
+
+.dish-add-button {
+  min-width: 175px;
+
+  padding: 13px 24px;
+
+  border: none;
+  border-radius: 3px;
+
+  background: #000000;
+  color: #ffffff;
+
+  font-family: "Google Sans", sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.dish-add-button:hover {
+  background: #222222;
+}
+
+/* =========================
+   OPTION GROUP
+========================= */
+
+.dish-option-group {
+  margin-bottom: 30px;
+}
+
+.dish-option-heading {
+  margin-bottom: 12px;
+}
+
+.dish-option-heading h2 {
+  margin: 0;
+
+  color: #1b1118;
+  font-size: 1.45rem;
+  line-height: 1.1;
+}
+
+.dish-option-heading h2 span {
+  margin-left: 4px;
+
+  font-family: "Abyssinia", sans-serif;
+  font-size: 1.25rem;
+}
+
+.dish-option-heading p {
+  margin: 5px 0 0;
+
+  color: #777777;
+  font-size: 0.68rem;
+}
+
+/* =========================
+   EXTRA CARDS
+========================= */
+
+.dish-extras-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.dish-extra-card {
+  position: relative;
+
+  min-width: 0;
+  overflow: hidden;
+
+  border: 1px solid #dddddd;
+  border-radius: 13px;
+
+  background: #ffffff;
+}
+
+.dish-extra-card-selected {
+  border-color: #111111;
+}
+
+.dish-extra-image {
+  width: 100%;
+  height: 145px;
+  overflow: hidden;
+  background: #eeeeee;
+}
+
+.dish-extra-image img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.dish-extra-content {
+  min-height: 91px;
+
+  padding: 10px 10px 9px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.dish-extra-title {
+  display: flex;
+  flex-direction: column;
+}
+
+.dish-extra-title strong {
+  color: #111111;
+  font-size: 0.75rem;
+  line-height: 1.15;
+}
+
+.dish-extra-amharic {
+  margin-top: 3px;
+
+  color: #333333;
+  font-family: "Abyssinia", sans-serif;
+  font-size: 0.72rem;
+  line-height: 1.05;
+}
+
+.dish-extra-price {
+  margin-top: 8px;
+
+  color: #111111;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.dish-extra-quantity {
+  display: flex;
+  align-items: center;
+
+  align-self: flex-end;
+
+  height: 27px;
+  margin-top: -26px;
+
+  overflow: hidden;
+  border: 1px solid #dddddd;
+  border-radius: 5px;
+}
+
+.dish-extra-quantity button,
+.dish-extra-quantity span {
+  width: 27px;
+  height: 27px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  background: #ffffff;
+
+  color: #111111;
+
+  font-family: "Google Sans", sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
+.dish-extra-quantity button {
+  cursor: pointer;
+}
+
+.dish-extra-quantity button:hover {
+  background: #eeeeee;
+}
+
+/* =========================
+   DETAILS
+========================= */
+
+.dish-information {
+  margin-top: 25px;
+}
+
+.dish-information h2,
+.dish-ingredients h2 {
+  margin: 0 0 12px;
+
+  color: #111111;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.dish-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.dish-meta-grid > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dish-meta-grid strong {
+  color: #111111;
+  font-size: 0.68rem;
+}
+
+.dish-meta-grid span {
+  color: #666666;
+  font-size: 0.68rem;
+  line-height: 1.3;
+}
+
+/* =========================
+   INGREDIENTS
+========================= */
+
+.dish-ingredients {
+  margin-top: 24px;
+}
+
+.dish-ingredients ul {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 6px 35px;
+
+  margin: 0;
+  padding-left: 15px;
+}
+
+.dish-ingredients li {
+  color: #555555;
+  font-size: 0.68rem;
+  line-height: 1.4;
+}
+
+/* =========================
+   NOT FOUND
+========================= */
+
+.dish-not-found {
+  min-height: calc(100vh - 98px);
+  padding: 100px 20px;
+
+  font-family: "Google Sans", sans-serif;
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 900px) {
+  .dish-detail-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .dish-main-image {
+    height: 520px;
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+  .dish-detail-page {
+    padding: 45px 0 65px;
+  }
+
+  .dish-detail-page .container {
+    padding: 0 16px;
+  }
+
+  .dish-main-image {
+    height: 390px;
+  }
+
+  .dish-title-row {
+    flex-direction: column;
+  }
+
+  .dish-title-row h1 {
+    font-size: 2.35rem;
+  }
+
+  .dish-price {
+    font-size: 1.5rem;
+  }
+
+  .dish-top-action {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .dish-add-button {
+    width: 100%;
+  }
+
+  .dish-extras-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .dish-extra-image {
+    height: 130px;
+  }
+
+  .dish-meta-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .dish-ingredients ul {
+    grid-template-columns: 1fr;
+  }
+}
