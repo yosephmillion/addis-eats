@@ -12,7 +12,7 @@ const DishDetail = lazy(() => import("./DishDetails"));
 const Favorites = lazy(() => import("./pages/Favorites"));
 const Cart = lazy(() => import("./pages/Cart"));
 const SignIn = lazy(() => import("./pages/SignIn"));
-const Checkout = lazy(() => import("./pages/Checkout"));
+const Checkout = lazy(() => import("./pages/CheckOut"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 function LoadingScreen() {
