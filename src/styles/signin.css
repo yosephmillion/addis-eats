@@ -58,8 +58,6 @@
   line-height: 1.5;
 }
 
-/* SOCIAL SIGN IN */
-
 .social-signin {
   display: flex;
   flex-direction: column;
@@ -100,8 +98,6 @@
   background: #f7f7f7;
 }
 
-/* DIVIDER */
-
 .signin-divider {
   display: flex;
   align-items: center;
@@ -120,7 +116,19 @@
   background: #e5e5e5;
 }
 
-/* FORM */
+.signin-error {
+  width: 100%;
+  margin-bottom: 18px;
+  padding: 11px 13px;
+  border: 1px solid #9a5a35;
+  border-radius: 9px;
+  background: #241611;
+  color: #f0b49a;
+  font-family: "Google Sans", sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  box-sizing: border-box;
+}
 
 .signin-form {
   display: flex;
@@ -145,7 +153,7 @@
   outline: none;
 
   background: #fff;
-  color: #f1eaea;
+  color: #000000;
 
   font-family: "Google Sans", sans-serif;
   font-size: 0.8rem;

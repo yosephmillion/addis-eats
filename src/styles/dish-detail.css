@@ -336,7 +336,7 @@
   border: 1px solid #dddddd;
   border-radius: 13px;
 
-  background: #ffffff;
+  background: #000000;
 }
 
 .dish-extra-card-selected {
@@ -374,7 +374,7 @@
 }
 
 .dish-extra-title strong {
-  color: #111111;
+  color: #fcfafa;
   font-size: 0.75rem;
   line-height: 1.15;
 }
@@ -382,7 +382,7 @@
 .dish-extra-amharic {
   margin-top: 3px;
 
-  color: #333333;
+  color: #fffdfd;
   font-family: "Abyssinia", sans-serif;
   font-size: 0.72rem;
   line-height: 1.05;
@@ -391,7 +391,7 @@
 .dish-extra-price {
   margin-top: 8px;
 
-  color: #111111;
+  color: #fffdfd;
   font-size: 0.78rem;
   font-weight: 700;
 }
@@ -406,23 +406,23 @@
   margin-top: -26px;
 
   overflow: hidden;
-  border: 1px solid #dddddd;
-  border-radius: 5px;
+  border: 0.5px solid #a6a2a2;
+  border-radius: 4px;
 }
 
 .dish-extra-quantity button,
 .dish-extra-quantity span {
   width: 27px;
-  height: 27px;
+  height: 40px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
   border: none;
-  background: #ffffff;
+  background: #fffcfc;
 
-  color: #111111;
+  color: #020202;
 
   font-family: "Google Sans", sans-serif;
   font-size: 0.68rem;
@@ -434,7 +434,7 @@
 }
 
 .dish-extra-quantity button:hover {
-  background: #eeeeee;
+  background: #a6a2a2;
 }
 
 /* =========================

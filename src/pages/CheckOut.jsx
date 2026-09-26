@@ -1,6 +1,9 @@
-import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Link, useNavigate } from "react-router-dom";
-import { useCart } from "../context/CartContext";
+
+import { useCartStore } from "../store/cartStore";
+import { checkoutSchema } from "../schemas/checkoutSchema";
 
 import telebirrLogo from "../assets/icons/telebirr.png";
 import cbebirrLogo from "../assets/icons/cbebirr.png";
@@ -12,44 +15,63 @@ import "../styles/checkout.css";
 function Checkout() {
   const navigate = useNavigate();
 
-  const { cart, cartTotal, clearCart } = useCart();
+  const cart = useCartStore((state) => state.cart);
+  const clearCart = useCartStore((state) => state.clearCart);
 
-  const [paymentMethod, setPaymentMethod] = useState("");
-  const [address, setAddress] = useState({
-    fullName: "",
-    phone: "",
-    city: "Addis Ababa",
-    address: "",
-    deliveryNote: "",
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(checkoutSchema),
+
+    defaultValues: {
+      fullName: "",
+      phone: "",
+      city: "",
+      address: "",
+      deliveryNote: "",
+      paymentMethod: "",
+    },
   });
 
-  function handleChange(event) {
-    const { name, value } = event.target;
+  const paymentMethod = watch("paymentMethod");
 
-    setAddress((current) => ({
-      ...current,
-      [name]: value,
-    }));
-  }
+  const paymentOptions = [
+    {
+      id: "telebirr",
+      name: "Telebirr",
+      image: telebirrLogo,
+    },
+    {
+      id: "cbebirr",
+      name: "CBE Birr",
+      image: cbebirrLogo,
+    },
+    {
+      id: "chapa",
+      name: "Chapa",
+      image: chappaLogo,
+    },
+    {
+      id: "mpesa",
+      name: "M-Pesa",
+      image: mpesaLogo,
+    },
+  ];
 
-  function handleSubmit(event) {
-    event.preventDefault();
+  const selectedPayment = paymentOptions.find(
+    (payment) => payment.id === paymentMethod,
+  );
 
-    if (!paymentMethod) {
-      alert("Please select a payment method.");
-      return;
-    }
-
-    if (!address.fullName || !address.phone || !address.address) {
-      alert("Please complete your delivery address.");
-      return;
-    }
-
-    alert(`Order placed successfully!\nPayment: ${paymentMethod}`);
+  const onSubmit = (data) => {
+    alert(`Order placed successfully!\nPayment: ${data.paymentMethod}`);
 
     clearCart();
     navigate("/");
-  }
+  };
 
   if (cart.length === 0) {
     return (
@@ -79,32 +101,18 @@ function Checkout() {
   );
 
   const extrasTotal = cart.reduce(
-    (total, item) => total + Number(item.extrasTotal || 0),
+    (total, item) =>
+      total +
+      (item.extras || []).reduce(
+        (extraTotal, extra) =>
+          extraTotal +
+          Number(extra.priceETB || 0) * Number(extra.quantity || 1),
+        0,
+      ),
     0,
   );
 
-  const paymentOptions = [
-    {
-      id: "telebirr",
-      name: "Telebirr",
-      image: telebirrLogo,
-    },
-    {
-      id: "cbebirr",
-      name: "CBE Birr",
-      image: cbebirrLogo,
-    },
-    {
-      id: "chapa",
-      name: "Chapa",
-      image: chappaLogo,
-    },
-    {
-      id: "mpesa",
-      name: "M-Pesa",
-      image: mpesaLogo,
-    },
-  ];
+  const cartTotal = dishesTotal + extrasTotal;
 
   return (
     <section className="checkout-page">
@@ -119,10 +127,12 @@ function Checkout() {
           </p>
         </div>
 
-        <form className="checkout-layout" onSubmit={handleSubmit}>
-          {/* LEFT SIDE */}
+        <form
+          className="checkout-layout"
+          onSubmit={handleSubmit(onSubmit)}
+          noValidate
+        >
           <div className="checkout-main">
-            {/* DELIVERY ADDRESS */}
             <section className="checkout-section">
               <div className="checkout-section-heading">
                 <span>01</span>
@@ -140,13 +150,16 @@ function Checkout() {
 
                   <input
                     id="fullName"
-                    name="fullName"
                     type="text"
-                    value={address.fullName}
-                    onChange={handleChange}
                     placeholder="Your full name"
-                    required
+                    {...register("fullName")}
                   />
+
+                  {errors.fullName && (
+                    <small className="checkout-error">
+                      {errors.fullName.message}
+                    </small>
+                  )}
                 </div>
 
                 <div className="checkout-field">
@@ -154,13 +167,16 @@ function Checkout() {
 
                   <input
                     id="phone"
-                    name="phone"
                     type="tel"
-                    value={address.phone}
-                    onChange={handleChange}
                     placeholder="09XXXXXXXX"
-                    required
+                    {...register("phone")}
                   />
+
+                  {errors.phone && (
+                    <small className="checkout-error">
+                      {errors.phone.message}
+                    </small>
+                  )}
                 </div>
 
                 <div className="checkout-field">
@@ -168,11 +184,16 @@ function Checkout() {
 
                   <input
                     id="city"
-                    name="city"
                     type="text"
-                    value={address.city}
-                    onChange={handleChange}
+                    placeholder="Addis Ababa"
+                    {...register("city")}
                   />
+
+                  {errors.city && (
+                    <small className="checkout-error">
+                      {errors.city.message}
+                    </small>
+                  )}
                 </div>
 
                 <div className="checkout-field checkout-field-full">
@@ -180,17 +201,19 @@ function Checkout() {
 
                   <input
                     id="address"
-                    name="address"
                     type="text"
-                    value={address.address}
-                    onChange={handleChange}
                     placeholder="Street, building, area or landmark"
-                    required
+                    {...register("address")}
                   />
+
+                  {errors.address && (
+                    <small className="checkout-error">
+                      {errors.address.message}
+                    </small>
+                  )}
                 </div>
               </div>
 
-              {/* MAP */}
               <div className="checkout-map-wrapper">
                 <div className="checkout-map-header">
                   <div>
@@ -204,7 +227,7 @@ function Checkout() {
                     className="map-location-button"
                     onClick={() =>
                       alert(
-                        "Map location feature can be connected to Google Maps or OpenStreetMap.",
+                        "Map location can be connected to Google Maps or OpenStreetMap.",
                       )
                     }
                   >
@@ -214,6 +237,8 @@ function Checkout() {
 
                 <div className="checkout-map">
                   <div className="map-grid">
+                    <span></span>
+                    <span></span>
                     <span></span>
                     <span></span>
                     <span></span>
@@ -237,16 +262,13 @@ function Checkout() {
 
                 <textarea
                   id="deliveryNote"
-                  name="deliveryNote"
-                  value={address.deliveryNote}
-                  onChange={handleChange}
                   placeholder="Example: Please call when you arrive..."
                   rows="3"
+                  {...register("deliveryNote")}
                 />
               </div>
             </section>
 
-            {/* PAYMENT */}
             <section className="checkout-section">
               <div className="checkout-section-heading">
                 <span>02</span>
@@ -266,7 +288,12 @@ function Checkout() {
                     className={`payment-option ${
                       paymentMethod === payment.id ? "selected" : ""
                     }`}
-                    onClick={() => setPaymentMethod(payment.id)}
+                    onClick={() =>
+                      setValue("paymentMethod", payment.id, {
+                        shouldValidate: true,
+                        shouldDirty: true,
+                      })
+                    }
                   >
                     <span className="payment-logo">
                       <img src={payment.image} alt={payment.name} />
@@ -281,8 +308,13 @@ function Checkout() {
                 ))}
               </div>
 
-              {/* QR PAYMENT */}
-              {paymentMethod && (
+              {errors.paymentMethod && (
+                <p className="checkout-error payment-error">
+                  {errors.paymentMethod.message}
+                </p>
+              )}
+
+              {paymentMethod && selectedPayment && (
                 <div className="qr-payment">
                   <div className="qr-placeholder">
                     <div className="qr-inner">
@@ -291,20 +323,13 @@ function Checkout() {
                   </div>
 
                   <div className="qr-content">
-                    <span className="checkout-eyebrow">QR PAYMENT</span>
-                    <img src={paymentQr} alt="Payment QR Code" />
-                    <h3>
-                      Scan to pay with{" "}
-                      {
-                        paymentOptions.find(
-                          (payment) => payment.id === paymentMethod,
-                        )?.name
-                      }
-                    </h3>
+                    <span className="checkout-eyebrow">PAYMENT</span>
+
+                    <h3>Pay with {selectedPayment.name}</h3>
 
                     <p>
-                      Open your payment application and scan the QR code to
-                      complete your payment.
+                      Open your {selectedPayment.name} application and complete
+                      the payment.
                     </p>
 
                     <strong>
@@ -313,21 +338,13 @@ function Checkout() {
                   </div>
                 </div>
               )}
-
-              <div className="payment-security">
-                <span>🔒</span>
-
-                <p>Your payment information is handled securely.</p>
-              </div>
             </section>
 
-            {/* PLACE ORDER */}
             <button type="submit" className="place-order-button">
               Place Order
             </button>
           </div>
 
-          {/* RIGHT SIDE — ORDER SUMMARY */}
           <aside className="checkout-summary">
             <div className="checkout-summary-inner">
               <span className="checkout-eyebrow">YOUR ORDER</span>
@@ -336,7 +353,10 @@ function Checkout() {
 
               <div className="checkout-summary-items">
                 {cart.map((item) => (
-                  <div className="checkout-summary-item" key={item.cartItemId}>
+                  <div
+                    className="checkout-summary-item"
+                    key={item.cartItemId || item.id}
+                  >
                     <div className="checkout-summary-image">
                       <img src={item.image} alt={item.nameEn} />
                     </div>
@@ -349,7 +369,9 @@ function Checkout() {
                       <span>Qty: {item.quantity}</span>
 
                       <strong>
-                        {Number(item.priceETB * item.quantity).toLocaleString()}{" "}
+                        {Number(
+                          item.priceETB * Number(item.quantity || 1),
+                        ).toLocaleString()}{" "}
                         ETB
                       </strong>
                     </div>
@@ -357,7 +379,6 @@ function Checkout() {
                 ))}
               </div>
 
-              {/* EXTRAS */}
               {cart.some((item) => item.extras && item.extras.length > 0) && (
                 <div className="checkout-extras">
                   <h3>Extras</h3>
@@ -366,7 +387,7 @@ function Checkout() {
                     item.extras?.map((extra) => (
                       <div
                         className="checkout-extra"
-                        key={`${item.cartItemId}-${extra.id}`}
+                        key={`${item.cartItemId || item.id}-${extra.nameEn}`}
                       >
                         <span>
                           {extra.nameEn} × {extra.quantity || 1}
@@ -374,7 +395,7 @@ function Checkout() {
 
                         <strong>
                           {Number(
-                            extra.priceETB * (extra.quantity || 1),
+                            extra.priceETB * Number(extra.quantity || 1),
                           ).toLocaleString()}{" "}
                           ETB
                         </strong>
@@ -392,7 +413,7 @@ function Checkout() {
                   {cart
                     .filter((item) => item.note)
                     .map((item) => (
-                      <p key={item.cartItemId}>
+                      <p key={item.cartItemId || item.id}>
                         <strong>{item.nameEn}:</strong> {item.note}
                       </p>
                     ))}

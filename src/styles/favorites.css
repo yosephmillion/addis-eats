@@ -12,10 +12,6 @@
   font-style: normal;
 }
 
-/* =========================================================
-   FAVORITE BUTTON
-   ========================================================= */
-
 .favorite-button,
 .favorite-remove-button {
   position: absolute;
@@ -39,8 +35,6 @@
   cursor: pointer;
 }
 
-/* Favorite icon image */
-
 .favorite-icon-image {
   display: block;
 
@@ -50,30 +44,20 @@
   object-fit: contain;
 }
 
-/* Active / liked state */
-
 .favorite-button.active,
 .favorite-remove-button.active {
   background: #da1a1ae2;
 }
 
-/* Hover */
-
 .favorite-button:hover,
 .favorite-remove-button:hover {
-  background: rgba(247, 245, 245, 0.65);
+  background: rgba(221, 54, 54, 0.65);
 }
-
-/* Active hover */
 
 .favorite-button.active:hover,
 .favorite-remove-button.active:hover {
   background: #fd0606;
 }
-
-/* =========================================================
-   FAVORITES PAGE
-   ========================================================= */
 
 .favorites-page {
   min-height: calc(100vh - 98px);
@@ -86,8 +70,6 @@
   font-family: "Google Sans", sans-serif;
 }
 
-/* Main container */
-
 .favorites-page .container {
   width: 100%;
   max-width: 1180px;
@@ -95,10 +77,6 @@
   margin: 0 auto;
   padding: 0 20px;
 }
-
-/* =========================================================
-   PAGE HEADING
-   ========================================================= */
 
 .favorites-page .section-heading {
   margin-bottom: 40px;
@@ -138,10 +116,6 @@
   line-height: 1.5;
 }
 
-/* =========================================================
-   FAVORITES GRID
-   ========================================================= */
-
 .favorites-grid {
   display: grid;
 
@@ -149,10 +123,6 @@
 
   gap: 24px;
 }
-
-/* =========================================================
-   FAVORITE DISH CARD
-   ========================================================= */
 
 .favorite-dish-card {
   position: relative;
@@ -167,10 +137,6 @@
   color: #ffffff;
 }
 
-/* =========================================================
-   DISH LINK
-   ========================================================= */
-
 .favorite-dish-link {
   display: block;
 
@@ -180,10 +146,6 @@
   color: inherit;
   text-decoration: none;
 }
-
-/* =========================================================
-   DISH IMAGE
-   ========================================================= */
 
 .favorite-dish-visual {
   position: absolute;
@@ -219,10 +181,6 @@
   object-fit: cover;
 }
 
-/* =========================================================
-   DISH CONTENT
-   ========================================================= */
-
 .favorite-dish-content {
   position: absolute;
 
@@ -232,8 +190,6 @@
 
   z-index: 2;
 }
-
-/* Category */
 
 .favorite-dish-category {
   display: block;
@@ -247,8 +203,6 @@
   font-weight: 700;
 }
 
-/* Amharic name */
-
 .favorite-dish-amharic {
   margin: 0;
 
@@ -260,8 +214,6 @@
   line-height: 1.15;
 }
 
-/* English name */
-
 .favorite-dish-content h2 {
   margin: 0 0 8px;
 
@@ -271,8 +223,6 @@
   line-height: 1;
   font-weight: 700;
 }
-
-/* Description */
 
 .favorite-dish-description {
   display: -webkit-box;
@@ -294,8 +244,6 @@
   line-clamp: 3;
 }
 
-/* Price */
-
 .favorite-dish-price {
   display: block;
 
@@ -305,10 +253,6 @@
   line-height: 1;
   font-weight: 700;
 }
-
-/* =========================================================
-   SPECIAL BADGE
-   ========================================================= */
 
 .favorite-special-badge {
   position: absolute;
@@ -323,10 +267,6 @@
   font-size: 2rem;
   line-height: 1;
 }
-
-/* =========================================================
-   VEGAN / FASTING BADGE
-   ========================================================= */
 
 .favorite-vegan-badge {
   position: absolute;
@@ -348,28 +288,6 @@
   font-weight: 700;
 }
 
-/* =========================================================
-   REMOVE / UNLIKE BUTTON
-   ========================================================= */
-
-/*
-   This is the important part.
-
-   Favorites.jsx should contain:
-
-   <button
-     type="button"
-     className="favorite-remove-button"
-     onClick={() => removeFavorite(dish.id)}
-   >
-     <img
-       src={favoriteIcon}
-       alt=""
-       className="favorite-icon-image"
-     />
-   </button>
-*/
-
 .favorite-remove-button {
   position: absolute;
 
@@ -390,7 +308,7 @@
   border: none;
   border-radius: 50%;
 
-  background: #ffffff;
+  background: #f40707a7;
 
   cursor: pointer;
 }
@@ -420,8 +338,6 @@
   cursor: pointer;
 }
 
-/* Icon inside remove button */
-
 .favorite-remove-button .favorite-icon-image {
   display: block;
 
@@ -431,15 +347,9 @@
   object-fit: contain;
 }
 
-/* Remove button hover */
-
 .favorite-remove-button:hover {
-  background: #ffffff;
+  background: #930f0f54;
 }
-
-/* =========================================================
-   EMPTY FAVORITES STATE
-   ========================================================= */
 
 .favorites-empty {
   max-width: 620px;
@@ -456,8 +366,6 @@
   text-align: center;
 }
 
-/* Empty heart/icon */
-
 .favorites-empty-icon {
   margin-bottom: 15px;
 
@@ -469,8 +377,6 @@
   line-height: 1;
 }
 
-/* Empty heading */
-
 .favorites-empty h2 {
   margin: 0 0 12px;
 
@@ -478,8 +384,6 @@
 
   font-size: 1.7rem;
 }
-
-/* Empty description */
 
 .favorites-empty p {
   max-width: 420px;
@@ -491,8 +395,6 @@
   font-size: 0.82rem;
   line-height: 1.6;
 }
-
-/* Browse menu button */
 
 .favorites-empty .btn-primary {
   display: inline-flex;
@@ -515,19 +417,11 @@
   text-decoration: none;
 }
 
-/* =========================================================
-   TABLET
-   ========================================================= */
-
 @media (max-width: 800px) {
   .favorites-grid {
     grid-template-columns: 1fr;
   }
 }
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
 
 @media (max-width: 600px) {
   .favorite-button,
@@ -544,10 +438,6 @@
     height: 22px;
   }
 }
-
-/* =========================================================
-   SMALL MOBILE
-   ========================================================= */
 
 @media (max-width: 550px) {
   .favorites-page {

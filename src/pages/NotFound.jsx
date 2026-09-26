@@ -5,27 +5,19 @@ function NotFound() {
   return (
     <section className="not-found-page">
       <div className="container">
-        <div className="not-found-card">
-          <span className="not-found-label">ADDIS EATS</span>
-
-          <div className="not-found-number">404</div>
+        <div className="not-found-content">
+          <span className="not-found-eyebrow">404 ERROR</span>
 
           <h1>Page Not Found</h1>
 
           <p>
-            Sorry, we couldn't find the page you're looking for. Let's get you
-            back to something delicious.
+            Sorry, the page you are looking for does not exist or may have been
+            moved.
           </p>
 
-          <div className="not-found-actions">
-            <Link to="/" className="btn btn-primary">
-              Back Home
-            </Link>
-
-            <Link to="/menu" className="btn btn-secondary">
-              Browse Menu
-            </Link>
-          </div>
+          <Link to="/" className="not-found-button">
+            Back to Home
+          </Link>
         </div>
       </div>
     </section>

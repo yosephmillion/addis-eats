@@ -19,10 +19,6 @@
   font-style: normal;
 }
 
-/* =========================================
-   CHECKOUT PAGE
-========================================= */
-
 .checkout-page {
   min-height: calc(100vh - 98px);
   padding: 55px 0 90px;
@@ -38,10 +34,6 @@
   padding: 0 20px;
   box-sizing: border-box;
 }
-
-/* =========================================
-   PAGE HEADING
-========================================= */
 
 .checkout-heading {
   margin-bottom: 35px;
@@ -79,10 +71,6 @@
   line-height: 1.5;
 }
 
-/* =========================================
-   MAIN CHECKOUT LAYOUT
-========================================= */
-
 .checkout-layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 350px;
@@ -90,19 +78,11 @@
   gap: 28px;
 }
 
-/* =========================================
-   LEFT SIDE
-========================================= */
-
 .checkout-main {
   display: flex;
   flex-direction: column;
   gap: 22px;
 }
-
-/* =========================================
-   CHECKOUT SECTIONS
-========================================= */
 
 .checkout-section {
   padding: 28px;
@@ -158,10 +138,6 @@
   font-size: 0.75rem;
   line-height: 1.5;
 }
-
-/* =========================================
-   FORM
-========================================= */
 
 .checkout-form-grid {
   display: grid;
@@ -233,10 +209,6 @@
   border-color: #9a5a35;
 }
 
-/* =========================================
-   MAP
-========================================= */
-
 .checkout-map-wrapper {
   margin-top: 25px;
 }
@@ -288,11 +260,6 @@
 .map-location-button:hover {
   background: #f5f5f5;
 }
-
-/* =========================================
-   MAP AREA
-========================================= */
-
 .checkout-map {
   position: relative;
 
@@ -353,10 +320,6 @@
 
   transform: rotate(24deg);
 }
-
-/* =========================================
-   MAP PIN
-========================================= */
 
 .map-pin {
   position: absolute;
@@ -419,10 +382,6 @@
   font-size: 0.62rem;
   font-weight: 700;
 }
-
-/* =========================================
-   PAYMENT OPTIONS
-========================================= */
 
 .payment-options {
   display: grid;
@@ -516,10 +475,6 @@
   background: #9a5a35;
 }
 
-/* =========================================
-   QR PAYMENT
-========================================= */
-
 .qr-payment {
   display: flex;
   align-items: center;
@@ -602,10 +557,6 @@
   font-weight: 700;
 }
 
-/* =========================================
-   PAYMENT SECURITY
-========================================= */
-
 .payment-security {
   display: flex;
   align-items: center;
@@ -628,10 +579,6 @@
 
   font-size: 0.65rem;
 }
-
-/* =========================================
-   PLACE ORDER
-========================================= */
 
 .place-order-button {
   display: flex;
@@ -658,10 +605,6 @@
 .place-order-button:hover {
   background: #222222;
 }
-
-/* =========================================
-   ORDER SUMMARY
-========================================= */
 
 .checkout-summary {
   position: sticky;
@@ -690,10 +633,6 @@
   line-height: 1.1;
   font-weight: 700;
 }
-
-/* =========================================
-   SUMMARY DISHES
-========================================= */
 
 .checkout-summary-items {
   display: flex;
@@ -772,10 +711,6 @@
   font-weight: 700;
 }
 
-/* =========================================
-   EXTRAS
-========================================= */
-
 .checkout-extras {
   padding-top: 17px;
   border-top: 1px solid #333333;
@@ -820,10 +755,6 @@
   font-size: 0.64rem;
 }
 
-/* =========================================
-   NOTES
-========================================= */
-
 .checkout-notes {
   margin-top: 17px;
   padding-top: 17px;
@@ -843,10 +774,6 @@
 .checkout-notes strong {
   color: #ffffff;
 }
-
-/* =========================================
-   PRICE BREAKDOWN
-========================================= */
 
 .checkout-price-breakdown {
   margin-top: 20px;
@@ -896,10 +823,6 @@
   line-height: 1;
 }
 
-/* =========================================
-   EDIT CART
-========================================= */
-
 .edit-cart-link {
   display: flex;
   align-items: center;
@@ -921,10 +844,6 @@
 .edit-cart-link:hover {
   background: #151515;
 }
-
-/* =========================================
-   EMPTY CHECKOUT
-========================================= */
 
 .checkout-empty {
   display: flex;
@@ -970,6 +889,24 @@
   line-height: 1.6;
 }
 
+.checkout-error {
+  display: block;
+  margin-top: 0.4rem;
+  color: #9a5a35;
+  font-size: 0.78rem;
+  line-height: 1.3;
+}
+
+.payment-error {
+  margin-top: 0.8rem;
+}
+
+.checkout-field input:focus,
+.checkout-field textarea:focus {
+  outline: 2px solid rgba(154, 90, 53, 0.25);
+  border-color: #9a5a35;
+}
+
 .checkout-primary-button {
   display: inline-flex;
   align-items: center;
@@ -989,10 +926,6 @@
   text-decoration: none;
 }
 
-/* =========================================
-   TABLET
-========================================= */
-
 @media (max-width: 950px) {
   .checkout-layout {
     grid-template-columns: 1fr;
@@ -1006,10 +939,6 @@
     max-width: none;
   }
 }
-
-/* =========================================
-   MOBILE
-========================================= */
 
 @media (max-width: 700px) {
   .checkout-page {
@@ -1068,10 +997,6 @@
     padding: 21px;
   }
 }
-
-/* =========================================
-   SMALL MOBILE
-========================================= */
 
 @media (max-width: 450px) {
   .checkout-heading h1 {

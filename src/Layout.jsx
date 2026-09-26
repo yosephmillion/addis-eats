@@ -1,6 +1,6 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
-import { useCart } from "./context/CartContext";
-import { useFavorites } from "./context/FavoritesContext";
+import { useCartStore } from "./store/cartStore";
+import { useFavoritesStore } from "./store/favoritesStore";
 
 import "./styles/header.css";
 import "./styles/footer.css";
@@ -8,10 +8,8 @@ import "./styles/footer.css";
 import footerLogo from "./assets/icons/addis-footer-logo.jpg";
 
 function Layout() {
-  const { cart } = useCart();
-  const { favorites } = useFavorites();
-
-  const cartCount = cart.reduce((sum, item) => sum + Number(item.quantity), 0);
+  const cartCount = useCartStore((state) => state.getCartCount());
+  const favorites = useFavoritesStore((state) => state.favorites);
 
   return (
     <div className="app">
@@ -34,6 +32,15 @@ function Layout() {
             </NavLink>
 
             <NavLink to="/cart" className="cart-nav-link">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="20px"
+                viewBox="0 -960 960 960"
+                width="20px"
+                fill="#FFFFFF"
+              >
+                <path d="M213-117.21q-21-21.21-21-51T213.21-219q21.21-21 51-21T315-218.79q21 21.21 21 51T314.79-117q-21.21 21-51 21T213-117.21Zm432 0q-21-21.21-21-51T645.21-219q21.21-21 51-21T747-218.79q21 21.21 21 51T746.79-117q-21.21 21-51 21T645-117.21ZM253-696l83 192h301l82-192H253Zm-31-72h570q14 0 20.5 11t1.5 23L702.63-476.14Q694-456 676.5-444T637-432H317l-42 72h493v72H276q-43 0-63.5-36.15-20.5-36.16.5-71.85l52-90-131-306H48v-72h133l41 96Zm114 264h301-301Z" />
+              </svg>
               Cart
               {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
             </NavLink>
@@ -68,7 +75,6 @@ function Layout() {
             </p>
           </div>
 
-          {/* Links */}
           <div className="footer-column">
             <h3>Links</h3>
 
@@ -77,7 +83,6 @@ function Layout() {
             <Link to="/feedback">Feedback</Link>
           </div>
 
-          {/* Social */}
           <div className="footer-column">
             <h3>Social</h3>
 
@@ -110,7 +115,6 @@ function Layout() {
             </a>
           </div>
 
-          {/* Company */}
           <div className="footer-column">
             <h3>Company</h3>
 
@@ -118,7 +122,6 @@ function Layout() {
             <Link to="/privacy">Privacy</Link>
           </div>
 
-          {/* Copyright */}
           <div className="footer-copyright">© 2026 Addis Eats</div>
         </div>
       </footer>

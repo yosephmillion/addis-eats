@@ -1,0 +1,35 @@
+.error-boundary {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  background: #fff;
+}
+
+.error-boundary-card {
+  width: min(500px, 100%);
+  padding: 3rem;
+  border: 1px solid #e5e5e5;
+  border-radius: 16px;
+  text-align: center;
+}
+
+.error-boundary-card h1 {
+  margin: 0 0 0.8rem;
+  font-family: "Google Sans", sans-serif;
+}
+
+.error-boundary-card p {
+  margin: 0 0 1.5rem;
+  color: #666;
+}
+
+.error-boundary-card button {
+  border: 0;
+  padding: 0.8rem 1.4rem;
+  border-radius: 999px;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+}

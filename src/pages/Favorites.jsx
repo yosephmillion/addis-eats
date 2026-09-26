@@ -1,19 +1,19 @@
 import { Link } from "react-router-dom";
-import { useFavorites } from "../context/FavoritesContext";
+import { useFavoritesStore } from "../store/favoritesStore";
 import favoriteIcon from "../assets/icons/favorite-icon.jpg";
 
 import "../styles/favorites.css";
 
 function Favorites() {
-  const { favorites, toggleFavorite } = useFavorites();
+  const { favorites, toggleFavorite } = useFavoritesStore();
 
   return (
     <section className="favorites-page">
       <div className="container">
         <div className="section-heading">
           <span>YOUR COLLECTION</span>
+
           <h1>Favorites</h1>
-          <p>The Ethiopian dishes you love, all in one place.</p>
         </div>
 
         {favorites.length === 0 ? (
@@ -35,7 +35,6 @@ function Favorites() {
           <div className="favorites-grid">
             {favorites.map((dish) => (
               <article className="favorite-dish-card" key={dish.id}>
-                {/* Dish link */}
                 <Link to={`/menu/${dish.id}`} className="favorite-dish-link">
                   <div className="favorite-dish-visual">
                     <img src={dish.image} alt={dish.nameEn} />
@@ -55,15 +54,14 @@ function Favorites() {
                     </p>
 
                     <span className="favorite-dish-price">
-                      {dish.priceETB} ETB
+                      {Number(dish.priceETB).toLocaleString()} ETB
                     </span>
                   </div>
                 </Link>
 
-                {/* Remove from favorites */}
                 <button
                   type="button"
-                  className="favorite-remove-button2"
+                  className="favorite-remove-button"
                   onClick={() => toggleFavorite(dish)}
                   aria-label={`Remove ${dish.nameEn} from favorites`}
                 >
@@ -74,12 +72,10 @@ function Favorites() {
                   />
                 </button>
 
-                {/* Special badge */}
                 {dish.isSpecial && (
                   <span className="favorite-special-badge">★</span>
                 )}
 
-                {/* Fasting badge */}
                 {dish.isFasting && (
                   <span className="favorite-vegan-badge">VEGAN</span>
                 )}

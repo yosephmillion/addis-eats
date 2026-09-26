@@ -2,22 +2,18 @@ import { useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import { dishes } from "./data/data";
-import { useCart } from "./context/CartContext";
+import { useCartStore } from "./store/cartStore";
 
 import "./styles/dish-detail.css";
 
 function DishDetail() {
   const { id } = useParams();
-  const { addConfiguredItem } = useCart();
-
+  const addConfiguredItem = useCartStore((state) => state.addConfiguredItem);
   const dish = dishes.find((item) => item.id === id);
-
   const [quantity, setQuantity] = useState(1);
   const [selectedExtras, setSelectedExtras] = useState({});
   const [note, setNote] = useState("");
-
   const extras = dish?.extras || [];
-
   const sideDishes = useMemo(
     () =>
       extras.filter((extra) => !extra.nameEn.toLowerCase().includes("spice")),

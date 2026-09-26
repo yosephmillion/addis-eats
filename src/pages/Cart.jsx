@@ -1,14 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useCart } from "../context/CartContext";
+import { useCartStore } from "../store/cartStore";
 
 import "../styles/cart.css";
 
 function Cart() {
   const navigate = useNavigate();
-
   const {
     cart,
-    cartTotal,
     increaseQuantity,
     decreaseQuantity,
     increaseExtraQuantity,
@@ -17,12 +15,12 @@ function Cart() {
     removeFromCart,
     updateNote,
     clearCart,
-  } = useCart();
-
+    getCartTotal,
+  } = useCartStore();
+  const cartTotal = getCartTotal();
   function handleCheckout() {
     navigate("/checkout");
   }
-
   if (cart.length === 0) {
     return (
       <section className="cart-page">
@@ -49,7 +47,6 @@ function Cart() {
   return (
     <section className="cart-page">
       <div className="container">
-        {/* PAGE HEADER */}
         <div className="cart-heading">
           <div>
             <span className="cart-eyebrow">YOUR ORDER</span>
@@ -70,20 +67,16 @@ function Cart() {
           </button>
         </div>
 
-        {/* CART CONTENT */}
         <div className="cart-layout">
-          {/* LEFT SIDE */}
           <div className="cart-items">
             {cart.map((item) => (
               <article className="cart-item" key={item.cartItemId}>
-                {/* DISH IMAGE */}
                 <Link to={`/menu/${item.id}`} className="cart-item-image-link">
                   <div className="cart-item-image">
                     <img src={item.image} alt={item.nameEn} />
                   </div>
                 </Link>
 
-                {/* DISH INFORMATION */}
                 <div className="cart-item-main">
                   <div className="cart-item-top">
                     <div>
@@ -103,11 +96,18 @@ function Cart() {
                       className="cart-remove-button"
                       onClick={() => removeFromCart(item.cartItemId)}
                     >
-                      Remove
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        height="20px"
+                        viewBox="0 -960 960 960"
+                        width="30px"
+                        fill="#ff0000"
+                      >
+                        <path d="m339-288 141-141 141 141 51-51-141-141 141-141-51-51-141 141-141-141-51 51 141 141-141 141 51 51ZM480-96q-79 0-149-30t-122.5-82.5Q156-261 126-331T96-480q0-80 30-149.5t82.5-122Q261-804 331-834t149-30q80 0 149.5 30t122 82.5Q804-699 834-629.5T864-480q0 79-30 149t-82.5 122.5Q699-156 629.5-126T480-96Zm0-72q130 0 221-91t91-221q0-130-91-221t-221-91q-130 0-221 91t-91 221q0 130 91 221t221 91Zm0-312Z" />
+                      </svg>
                     </button>
                   </div>
 
-                  {/* MAIN DISH PRICE + QUANTITY */}
                   <div className="cart-item-row">
                     <div className="cart-price">
                       {Number(item.priceETB).toLocaleString()} ETB
@@ -134,14 +134,13 @@ function Cart() {
                     </div>
                   </div>
 
-                  {/* EXTRAS */}
                   {item.extras && item.extras.length > 0 && (
                     <div className="cart-extras">
                       <h3>Extras / ተጨማሪ</h3>
 
                       <div className="cart-extra-list">
                         {item.extras.map((extra) => (
-                          <div className="cart-extra" key={extra.id}>
+                          <div className="cart-extra" key={extra.nameEn}>
                             <div className="cart-extra-info">
                               {extra.image && (
                                 <img src={extra.image} alt={extra.nameEn} />
@@ -167,7 +166,7 @@ function Cart() {
                                   onClick={() =>
                                     decreaseExtraQuantity(
                                       item.cartItemId,
-                                      extra.id,
+                                      extra.nameEn,
                                     )
                                   }
                                 >
@@ -181,7 +180,7 @@ function Cart() {
                                   onClick={() =>
                                     increaseExtraQuantity(
                                       item.cartItemId,
-                                      extra.id,
+                                      extra.nameEn,
                                     )
                                   }
                                 >
@@ -193,7 +192,7 @@ function Cart() {
                                 type="button"
                                 className="cart-extra-remove"
                                 onClick={() =>
-                                  removeExtra(item.cartItemId, extra.id)
+                                  removeExtra(item.cartItemId, extra.nameEn)
                                 }
                               >
                                 Remove
@@ -205,7 +204,6 @@ function Cart() {
                     </div>
                   )}
 
-                  {/* NOTE */}
                   <div className="cart-note">
                     <label htmlFor={`note-${item.cartItemId}`}>
                       Special note / ልዩ ማስታወሻ
@@ -222,12 +220,22 @@ function Cart() {
                     />
                   </div>
 
-                  {/* TOTAL */}
                   <div className="cart-item-total">
                     <span>Item Total</span>
 
                     <strong>
-                      {Number(item.totalPrice || 0).toLocaleString()} ETB
+                      {(
+                        Number(item.priceETB || 0) *
+                          Number(item.quantity || 1) +
+                        (item.extras || []).reduce(
+                          (total, extra) =>
+                            total +
+                            Number(extra.priceETB || 0) *
+                              Number(extra.quantity || 1),
+                          0,
+                        )
+                      ).toLocaleString()}{" "}
+                      ETB
                     </strong>
                   </div>
                 </div>
@@ -235,7 +243,6 @@ function Cart() {
             ))}
           </div>
 
-          {/* RIGHT SIDE SUMMARY */}
           <aside className="cart-summary">
             <div className="cart-summary-inner">
               <span className="cart-eyebrow">ORDER SUMMARY</span>
@@ -264,7 +271,15 @@ function Cart() {
                 <span>
                   {cart
                     .reduce(
-                      (total, item) => total + Number(item.extrasTotal || 0),
+                      (total, item) =>
+                        total +
+                        (item.extras || []).reduce(
+                          (extraTotal, extra) =>
+                            extraTotal +
+                            Number(extra.priceETB || 0) *
+                              Number(extra.quantity || 1),
+                          0,
+                        ),
                       0,
                     )
                     .toLocaleString()}{" "}
@@ -280,7 +295,6 @@ function Cart() {
                 <strong>{Number(cartTotal).toLocaleString()} ETB</strong>
               </div>
 
-              {/* TOP-LEVEL CHECKOUT BUTTON */}
               <button
                 type="button"
                 className="cart-checkout-button"

@@ -12,13 +12,10 @@ function DishCard({ dish }) {
           <span className="dish-category">{dish.category}</span>
           <span className="dish-rating">★ {dish.rating}</span>
         </div>
-
         <Link to={`/menu/${dish.id}`} className="dish-name">
           {dish.name}
         </Link>
-
         <p className="dish-description">{dish.description}</p>
-
         <div className="dish-card-bottom">
           <strong>{dish.price} ETB</strong>
 

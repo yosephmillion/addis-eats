@@ -1,56 +1,111 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import EmptyPage from "./pages/EmptyPage";
+import { lazy, Suspense } from "react";
+
 import Layout from "./Layout";
-import Home from "./pages/Home";
-import Menu from "./pages/Menu";
-import DishDetail from "./DishDetails";
-import Cart from "./pages/Cart";
-import SignIn from "./pages/SignIn";
-import Checkout from "./pages/CheckOut";
-import Favorites from "./pages/Favorites";
-import NotFound from "./pages/NotFound";
 import RequireAuth from "./auth/RequireAuth";
-import { CartProvider } from "./context/CartContext";
-import { FavoritesProvider } from "./context/FavoritesContext";
+import ErrorBoundary from "./components/ErrorBoundary";
+
+const Home = lazy(() => import("./pages/Home"));
+const Menu = lazy(() => import("./pages/Menu"));
+const DishDetail = lazy(() => import("./DishDetails"));
+const Favorites = lazy(() => import("./pages/Favorites"));
+const Cart = lazy(() => import("./pages/Cart"));
+const SignIn = lazy(() => import("./pages/SignIn"));
+const Checkout = lazy(() => import("./pages/Checkout"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+
+function LoadingScreen() {
+  return (
+    <div className="loading-screen">
+      <p>Loading Addis Eats...</p>
+    </div>
+  );
+}
 
 function App() {
   return (
-    <BrowserRouter>
-      <CartProvider>
-        <FavoritesProvider>
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route index element={<Home />} />
+    <ErrorBoundary>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route
+              index
+              element={
+                <Suspense fallback={<LoadingScreen />}>
+                  <Home />
+                </Suspense>
+              }
+            />
 
-              <Route path="menu" element={<Menu />} />
-              <Route path="menu/:id" element={<DishDetail />} />
+            <Route
+              path="menu"
+              element={
+                <Suspense fallback={<LoadingScreen />}>
+                  <Menu />
+                </Suspense>
+              }
+            />
 
-              <Route path="favorites" element={<Favorites />} />
-              <Route path="cart" element={<Cart />} />
+            <Route
+              path="menu/:id"
+              element={
+                <Suspense fallback={<LoadingScreen />}>
+                  <DishDetail />
+                </Suspense>
+              }
+            />
 
-              <Route path="signin" element={<SignIn />} />
-              <Route
-                path="checkout"
-                element={
-                  <RequireAuth>
+            <Route
+              path="favorites"
+              element={
+                <Suspense fallback={<LoadingScreen />}>
+                  <Favorites />
+                </Suspense>
+              }
+            />
+
+            <Route
+              path="cart"
+              element={
+                <Suspense fallback={<LoadingScreen />}>
+                  <Cart />
+                </Suspense>
+              }
+            />
+
+            <Route
+              path="signin"
+              element={
+                <Suspense fallback={<LoadingScreen />}>
+                  <SignIn />
+                </Suspense>
+              }
+            />
+
+            <Route
+              path="checkout"
+              element={
+                <RequireAuth>
+                  <Suspense fallback={<LoadingScreen />}>
                     <Checkout />
-                  </RequireAuth>
-                }
-              />
+                  </Suspense>
+                </RequireAuth>
+              }
+            />
 
-              <Route path="signup" element={<EmptyPage />} />
-              <Route path="signin" element={<SignIn />} />
-              <Route path="feedback" element={<EmptyPage />} />
-              <Route path="terms" element={<EmptyPage />} />
-              <Route path="privacy" element={<EmptyPage />} />
-
-              <Route path="*" element={<NotFound />} />
-            </Route>
-          </Routes>
-        </FavoritesProvider>
-      </CartProvider>
-    </BrowserRouter>
+            <Route
+              path="*"
+              element={
+                <Suspense fallback={<LoadingScreen />}>
+                  <NotFound />
+                </Suspense>
+              }
+            />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </ErrorBoundary>
   );
 }
 

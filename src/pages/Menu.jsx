@@ -1,13 +1,15 @@
 import { Link, useSearchParams } from "react-router-dom";
 import { dishes } from "../data/data.js";
-import { useFavorites } from "../context/FavoritesContext";
-import favoriteIcon from "../assets/icons/favorite-icon.jpg";
+import { useFavoritesStore } from "../store/favoritesStore";
+import favouriteIcon from "../assets/icons/favorite-icon.jpg";
+import specialStar from "../assets/icons/special-star.jpg";
+
 import "../styles/menu.css";
 
 function Menu() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const { toggleFavorite, isFavorite } = useFavorites();
-
+  const favorites = useFavoritesStore((state) => state.favorites);
+  const toggleFavorite = useFavoritesStore((state) => state.toggleFavorite);
   const selectedCategory = searchParams.get("category") || "All";
 
   const categories = ["All", ...new Set(dishes.map((dish) => dish.category))];
@@ -32,6 +34,10 @@ function Menu() {
     toggleFavorite(dish);
   }
 
+  function isDishFavorite(dishId) {
+    return favorites.some((favorite) => favorite.id === dishId);
+  }
+
   return (
     <section className="menu-page">
       <div className="container">
@@ -47,6 +53,7 @@ function Menu() {
           {categories.map((category) => (
             <button
               key={category}
+              type="button"
               className={
                 selectedCategory === category
                   ? "category-button active"
@@ -61,7 +68,7 @@ function Menu() {
 
         <div className="dish-grid">
           {filteredDishes.map((dish) => {
-            const favorite = isFavorite(dish.id);
+            const favorite = isDishFavorite(dish.id);
 
             return (
               <article className="dish-card" key={dish.id}>
@@ -74,16 +81,22 @@ function Menu() {
                     <img src={dish.image} alt={dish.nameEn} />
 
                     {dish.isSpecial && (
-                      <span className="special-badge">⭐</span>
+                      <span className="special-badge">
+                        <img
+                          src={specialStar}
+                          alt=""
+                          className="special-icon-image"
+                        />
+                      </span>
                     )}
 
                     {dish.isFasting && (
-                      <span className="vegan-badge">🌿 VEGAN</span>
+                      <span className="vegan-badge">VEGAN</span>
                     )}
                   </div>
 
                   <div className="dish-card-content">
-                    <span className="dish-category">{dish.category}</span>
+                    <span className="dish-category1">{dish.category}</span>
 
                     <p className="dish-amharic">{dish.nameAm}</p>
 
@@ -111,7 +124,7 @@ function Menu() {
                   aria-pressed={favorite}
                 >
                   <img
-                    src={favoriteIcon}
+                    src={favouriteIcon}
                     alt=""
                     className="favorite-icon-image"
                   />
